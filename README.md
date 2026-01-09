@@ -8,10 +8,10 @@
 graph TD
     Client["Next.js Frontend"] -->|REST| API["FastAPI Backend"]
     
-    subgraph "Backend Services"
-        API -->|Inference| ML["AI Model (RoBERTa)"]
-        API -->|Query/Report| DB[("Supabase")]
-        API -->|Validation| Rules["Keyword Rules"]
+    subgraph "Hybrid Intelligence Engine"
+        API -->|Language Analysis| ML["ML Model (RoBERTa)"]
+        API -->|Signals| DB[("Community Reports")]
+        API -->|Safety Net| Rules["Keyword Rules"]
     end
 ```
 
