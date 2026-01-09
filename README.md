@@ -4,6 +4,17 @@
 
 ## 🏗️ Technical Architecture
 
+```mermaid
+graph TD
+    Client[Next.js Frontend] -->|REST| API[FastAPI Backend]
+    
+    subgraph "Backend Services"
+        API -->|Inference| ML[AI Model (RoBERTa)]
+        API -->|Query/Report| DB[(Supabase)]
+        API -->|Validation| Rules[Keyword Rules]
+    end
+```
+
 ### **Frontend (The Face)**
 *   **Framework**: Next.js 14 (App Router)
 *   **UI Library**: Tailwind CSS v4 + Framer Motion (Glassmorphism & Neon Aesthetics).
