@@ -50,9 +50,9 @@ ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
 *   **Reporting**: ✅ Fully Operational. Users can submit detailed reports.
 *   **Live Feed**: ✅ Fully Operational. Home page displays real-time scam alerts.
 *   **Detailed Reports**: ✅ Fully Operational. Users can read actual report descriptions in scan results.
+*   **Trends Dashboard**: ✅ Fully Operational. Visual charts for scam activity and categories.
 *   **Database**: ✅ Connected & Seeded with test data.
 
 ## 🔮 Next Steps / Roadmap
-*   **Advanced Trends**: A dashboard page with charts showing "Top Scams this Week".
 *   **Authentication**: User login to track their report history.
 *   **Browser Extension**: Auto-blocker for Chrome/Edge.

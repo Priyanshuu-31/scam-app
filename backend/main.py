@@ -15,10 +15,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from backend.api.v1 import scan, report
+from backend.api.v1 import scan, report, stats
 
 app.include_router(scan.router, prefix="/api/v1", tags=["Scan"])
 app.include_router(report.router, prefix="/api/v1", tags=["Reports"])
+app.include_router(stats.router, prefix="/api/v1", tags=["Stats"])
 
 @app.get("/")
 def read_root():
