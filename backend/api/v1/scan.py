@@ -40,6 +40,8 @@ def calculate_risk_score(reports: List[dict], value: str) -> RiskScore:
         keyword_score = 100
 
     recency_score = 0
+    last_report_date = None
+    
     if reports:
         try:
             last_report_date = max(datetime.fromisoformat(r['created_at'].replace('Z', '')) for r in reports)
@@ -71,7 +73,8 @@ def calculate_risk_score(reports: List[dict], value: str) -> RiskScore:
         risk_score=final_score,
         level=level,
         report_count=count,
-        last_reported_at=None 
+        last_reported_at=last_report_date,
+        reports=reports
     )
 
 @router.get("/scan", response_model=RiskScore)

@@ -28,3 +28,4 @@ class RiskScore(BaseModel):
     level: RiskLevel
     report_count: int
     last_reported_at: Optional[datetime] = None
+    reports: List[dict] = []

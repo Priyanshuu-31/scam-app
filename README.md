@@ -49,6 +49,7 @@ ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
 *   **Scanning**: ✅ Fully Operational. Detects Text, UPI, and URLs.
 *   **Reporting**: ✅ Fully Operational. Users can submit detailed reports.
 *   **Live Feed**: ✅ Fully Operational. Home page displays real-time scam alerts.
+*   **Detailed Reports**: ✅ Fully Operational. Users can read actual report descriptions in scan results.
 *   **Database**: ✅ Connected & Seeded with test data.
 
 ## 🔮 Next Steps / Roadmap
