@@ -1,6 +1,6 @@
 # ScamShield 🛡️
 
-**ScamShield** is a fully functional, AI-powered platform designed to detect, report, and prevent digital scams in real-time. It differentiates itself with a **Hybrid Intelligence System** that combines deep learning with community-driven data.
+**ScamShield** is a fully functional, **Hybrid intelligence platform combining machine‑learning–based language analysis with community‑driven signals** designed to detect, report, and prevent digital scams in real-time.
 
 ## 🏗️ Technical Architecture
 
@@ -51,6 +51,7 @@ ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
 *   **Live Feed**: ✅ Fully Operational. Home page displays real-time scam alerts.
 *   **Detailed Reports**: ✅ Fully Operational. Users can read actual report descriptions in scan results.
 *   **Trends Dashboard**: ✅ Fully Operational. Visual charts for scam activity and categories.
+*   **Traceable Data**: ✅ Fully Operational. Click on charts to see the exact reports behind the data.
 *   **Database**: ✅ Connected & Seeded with test data.
 
 ## 🔮 Next Steps / Roadmap

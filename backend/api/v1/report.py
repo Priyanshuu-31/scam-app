@@ -34,13 +34,26 @@ async def create_report(report: ReportIn):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+from typing import Optional
+
 @router.get("/reports/recent")
-async def get_recent_reports(limit: int = 10):
+async def get_recent_reports(limit: int = 10, category: Optional[str] = None, date: Optional[str] = None):
     if not supabase:
         return []
     
     try:
-        res = supabase.table("reports").select("scammer_identifier, category, description, created_at").order("created_at", desc=True).limit(limit).execute()
+        query = supabase.table("reports").select("scammer_identifier, category, description, created_at").order("created_at", desc=True)
+        
+        if category:
+            query = query.eq("category", category)
+            
+        if date:
+            # Filter by specific date (YYYY-MM-DD from 00:00 to 23:59)
+            start_dt = f"{date}T00:00:00"
+            end_dt = f"{date}T23:59:59"
+            query = query.gte("created_at", start_dt).lte("created_at", end_dt)
+            
+        res = query.limit(limit).execute()
         return res.data
     except Exception as e:
         print(f"Error fetching existing reports: {e}")
