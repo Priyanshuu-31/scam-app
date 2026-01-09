@@ -6,12 +6,12 @@
 
 ```mermaid
 graph TD
-    Client[Next.js Frontend] -->|REST| API[FastAPI Backend]
+    Client["Next.js Frontend"] -->|REST| API["FastAPI Backend"]
     
     subgraph "Backend Services"
-        API -->|Inference| ML[AI Model (RoBERTa)]
-        API -->|Query/Report| DB[(Supabase)]
-        API -->|Validation| Rules[Keyword Rules]
+        API -->|Inference| ML["AI Model (RoBERTa)"]
+        API -->|Query/Report| DB[("Supabase")]
+        API -->|Validation| Rules["Keyword Rules"]
     end
 ```
 
