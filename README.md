@@ -53,7 +53,3 @@ ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
 *   **Trends Dashboard**: ✅ Fully Operational. Visual charts for scam activity and categories.
 *   **Traceable Data**: ✅ Fully Operational. Click on charts to see the exact reports behind the data.
 *   **Database**: ✅ Connected & Seeded with test data.
-
-## 🔮 Next Steps / Roadmap
-*   **Authentication**: User login to track their report history.
-*   **Browser Extension**: Auto-blocker for Chrome/Edge.
