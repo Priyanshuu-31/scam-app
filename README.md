@@ -1,8 +1,8 @@
-# ScamShield 🛡️
+# ScamShield 
 
 **ScamShield** is a fully functional, **Hybrid intelligence platform combining machine‑learning–based language analysis with community‑driven signals** designed to detect, report, and prevent digital scams in real-time.
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 ```mermaid
 graph TD
@@ -35,7 +35,7 @@ graph TD
     *   `POST /reports`: Validates and saves new scam reports.
     *   `GET /reports/recent`: Powers the live feed.
 
-## 🧠 The Hybrid Risk Logic (Key Differentiator)
+## The Hybrid Risk Logic (Key Differentiator)
 
 ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
 
@@ -44,12 +44,12 @@ ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
     *   *Example*: If a message contains "package delivery" + "click here", it forces a **CRITICAL SCORE (75)** even if the AI is unsure.
 3.  **Community Consensus**: Checks Supabase for existing reports against the identifier.
 
-## 🚀 Current Status: [BETA READY]
+## Current Status: 
 
-*   **Scanning**: ✅ Fully Operational. Detects Text, UPI, and URLs.
-*   **Reporting**: ✅ Fully Operational. Users can submit detailed reports.
-*   **Live Feed**: ✅ Fully Operational. Home page displays real-time scam alerts.
-*   **Detailed Reports**: ✅ Fully Operational. Users can read actual report descriptions in scan results.
-*   **Trends Dashboard**: ✅ Fully Operational. Visual charts for scam activity and categories.
-*   **Traceable Data**: ✅ Fully Operational. Click on charts to see the exact reports behind the data.
-*   **Database**: ✅ Connected & Seeded with test data.
+*   **Scanning**: Fully Operational. Detects Text, UPI, and URLs.
+*   **Reporting**: Fully Operational. Users can submit detailed reports.
+*   **Live Feed**: Fully Operational. Home page displays real-time scam alerts.
+*   **Detailed Reports**: Fully Operational. Users can read actual report descriptions in scan results.
+*   **Trends Dashboard**: Fully Operational. Visual charts for scam activity and categories.
+*   **Traceable Data**: Fully Operational. Click on charts to see the exact reports behind the data.
+*   **Database**: Connected & Seeded with test data.
