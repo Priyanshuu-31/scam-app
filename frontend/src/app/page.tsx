@@ -55,7 +55,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-[url('/grid.svg')] bg-fixed bg-center">
+    <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-fixed bg-center">
       {/* Background Gradient Blob */}
       <div className="fixed inset-0 bg-gradient-to-tr from-violet-900/20 via-background to-background -z-10" />
 
