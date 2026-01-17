@@ -21,7 +21,8 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/v1/scan?q=${encodeURIComponent(query)}`);
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+      const res = await fetch(`${API_URL}/api/v1/scan?q=${encodeURIComponent(query)}`);
       if (!res.ok) throw new Error("Scan failed");
       const data = await res.json();
 

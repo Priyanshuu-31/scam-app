@@ -1,76 +1,103 @@
 # ScamShield 🛡️
 
-**ScamShield** is a fully functional, **Hybrid intelligence platform combining machine‑learning–based language analysis with community‑driven signals** designed to detect, report, and prevent digital scams in real-time.
+**ScamShield** is a next-generation **Hybrid Intelligence Platform** designed to detect, analyze, and prevent digital scams in real-time. By combining state-of-the-art **Machine Learning (RoBERTa)** with **Community-Driven Signals**, ScamShield provides a robust defense against UPI fraud, phishing links, fake messages, and malicious phone numbers.
+
+---
+
+## 🔄 User Flow: How It Works
+
+ScamShield operates on a simple "Scan, Analyze, Protect" loop:
+
+### 1. **The Input (Scan)**
+*   **User Action**: A user receives a suspicious text, a weird UPI ID, or a link they aren't sure about.
+*   **Interaction**: They paste this identifier into the **ScamShield Live Scanner** on the home page.
+*   **System Check**: The frontend instantly sends this query to the backend API.
+
+### 2. **The Analysis (The Brain)**
+The backend `FastAPI` engine processes the input through three simultaneous layers:
+*   **Layer 1: Community Database Check**:
+    *   *Action*: Queries Supabase to see if anyone else has reported this specific number/ID.
+    *   *Result*: Instant "Flagged" status if matches are found.
+*   **Layer 2: AI Semantic Analysis (RoBERTa)**:
+    *   *Action*: If the input is text (e.g., "Urgent! Your KYC is expired"), the Transformer model analyzes the **intent** and **urgency**.
+    *   *Result*: Generates a "Suspicion Score" based on linguistic patterns used by scammers.
+*   **Layer 3: Rule-Based Heuristics**:
+    *   *Action*: Checks for known danger patterns (e.g., international codes like `+92`, `+234` or "click here" links).
+    *   *Result*: Overrides other signals if a known critical threat pattern is detected.
+
+### 3. **The Result (The Shield)**
+*   **Risk Meter**: The user sees a visual gauge from **0-100% Risk**.
+*   **Explainability**: The system tells them *why*:
+    *   *"Flagged by 12 community members"*
+    *   *"AI detected high urgency language"*
+    *   *"Contains high-risk country code"*
+*   **Actionable Advice**: The user gets clear steps: *"Block this number immediately"* or *"Do not click the link"*.
+
+### 4. **The Contribution (The Loop)**
+*   **Reporting**: If a user encounters a new scam, they visit the **/report** page.
+*   **Submission**: They provide the scammer's details, evidence, and description.
+*   **Real-Time Data**: This report issues a **Live Alert** on the homepage ticker and immediately updates the database, protecting current and future users.
+
+---
 
 ## 🏗️ Technical Architecture
 
 ```mermaid
 graph TD
-    Client["Next.js Frontend"] -->|REST| API["FastAPI Backend"]
+    User[User] -->|Scan/Report| Client["Next.js Frontend"]
+    Client -->|REST API| API["FastAPI Backend"]
     
     subgraph "Hybrid Intelligence Engine"
-        API -->|Language Analysis| ML["ML Model (RoBERTa)"]
-        API -->|Signals| DB[("Community Reports")]
-        API -->|Safety Net| Rules["Keyword Rules"]
+        API -->|NLP Analysis| ML["ML Model (RoBERTa)"]
+        API -->|Data Storage| DB[("Supabase (PostgreSQL)")]
+        API -->|Pattern Matching| Rules["Heuristic Rules"]
     end
+    
+    DB -->|Live Trends| Client
 ```
 
-### **Frontend (The Face)**
+### **Frontend**
 *   **Framework**: Next.js 14 (App Router)
-*   **UI Library**: Tailwind CSS v4 + Framer Motion (Glassmorphism & Neon Aesthetics).
-*   **Key Components**:
-    *   **Live Sanner**: Instant risk assessment interface.
-    *   **Risk Meter**: Animated gauge visualizing threat levels (Safe, Caution, Critical).
-    *   **Live Ticker**: Real-time scrolling feed of recent community reports (`LiveTicker.tsx`).
-    *   **Reporting Portal**: Dedicated page (`/report`) for users to submit evidence.
+*   **Styling**: Tailwind CSS v4 + Framer Motion (Glassmorphism & Neon Aesthetics)
+*   **Visualization**: Recharts for data trends.
 
-### **Backend (The Brain)**
-*   **Framework**: FastAPI (Python).
-*   **Database**: Supabase (PostgreSQL) - Stores `reports` and fraud entities.
-*   **AI Engine**:
-    *   **Model**: `mshenoda/roberta-spam` (Robust Transformer model for scam text classification).
-    *   **Logic**: `ml_engine.py` handles model inference utilizing a Singleton pattern for performance.
-*   **API**:
-    *   `GET /scan`: Hybrid risk assessment logic.
-    *   `POST /reports`: Validates and saves new scam reports.
-    *   `GET /reports/recent`: Powers the live feed.
+### **Backend**
+*   **Language**: Python 3.11+
+*   **Framework**: FastAPI
+*   **ML Engine**: Hugging Face Transformers (`mshenoda/roberta-spam`)
+*   **Database**: Supabase (PostgreSQL)
 
-## 🧠 The Hybrid Risk Logic (Key Differentiator)
+---
 
-ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
+## 🚀 Deployment
 
-1.  **AI Detection (RoBERTa)**: Analyzes semantic intent. (e.g., "Urgent action required").
-2.  **Keyword Safety Net**: Hard-coded overrides for high-danger patterns.
-    *   *Example*: If a message contains "package delivery" + "click here", it forces a **CRITICAL SCORE (75)** even if the AI is unsure.
-3.  **Community Consensus**: Checks Supabase for existing reports against the identifier.
+The project is designed for a split deployment architecture:
 
-## 🚀 Current Status: [BETA READY]
+### **Frontend (Vercel)**
+*   Hosted on **Vercel** for optimal Next.js performance.
+*   Connects to the backend via `NEXT_PUBLIC_API_URL`.
 
-*   **Scanning**: ✅ Fully Operational. Detects Text, UPI, and URLs.
-*   **Reporting**: ✅ Fully Operational. Users can submit detailed reports.
-*   **Live Feed**: ✅ Fully Operational. Home page displays real-time scam alerts.
-*   **Detailed Reports**: ✅ Fully Operational. Users can read actual report descriptions in scan results.
-*   **Trends Dashboard**: ✅ Fully Operational. Visual charts for scam activity and categories.
-*   **Traceable Data**: ✅ Fully Operational. Click on charts to see the exact reports behind the data.
-*   **Database**: ✅ Connected & Seeded with test data.
+### **Backend (Render)**
+*   Hosted on **Render** as a Web Service.
+*   Runs `uvicorn` with `gunicorn` support.
+*   **Config**: `render.yaml` included for auto-deployment.
+*   **Env Vars**: Requires `SUPABASE_URL` and `SUPABASE_KEY`.
 
-## Sample Data
+---
 
-The application comes with a pre-seeded set of sample data to demonstrate its capabilities. This includes approximately 35-40 entries covering various scam types such as:
-- **UPI Scams**: Fake payment requests, lottery scams.
-- **Phone Scams**: Impersonation, KYC fraud.
-- **URL Scams**: Phishing sites, fake offers.
-- **Message Scams**: Fake job offers, bank alerts.
+## 📊 Features & Status
 
-You can populate the database with this sample data by running the seed script:
-```bash
-python scripts/seed_data.py
-```
+*   **Scanning Engine**: ✅ Fully Operational. Detects Text, UPI, and URLs.
+*   **Risk Scoring**: ✅ Live. Calculates 0-100 risk based on hybrid signals.
+*   **Live Ticker**: ✅ Live. Real-time feed of scams reported by the community.
+*   **Trends Dashboard**: ✅ Live. Analytics on high-risk categories and activity spikes.
+*   **Traceability**: ✅ Live. Click-through from charts to actual evidence reports.
+*   **Dark Mode**: ✅ Standard. Optimized for high contrast and modern feel.
 
-## Contributing Data
+## 🤝 Contributing
+Users are encouraged to add new scam reports daily. This crowdsourced data is the backbone of ScamShield's detection capability.
+1.  **Via App**: Use the "Report a Scam" button.
+2.  **Via API**: POST to `/api/v1/reports`.
 
-Users and contributors can add new scam details on a daily basis to help the community. 
-1. **Via the App**: Use the "Report a Scam" feature in the frontend to submit new reports.
-2. **Via API**: POST requests to `/api/v1/reports` with the scam details.
-
-By continuously adding data, we create a more robust database that helps others identify and avoid potential scams.
+---
+*Built with ❤️ by Priyanshu & Team for a Safer Digital India.*

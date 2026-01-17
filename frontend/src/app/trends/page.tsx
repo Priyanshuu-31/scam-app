@@ -30,7 +30,8 @@ export default function TrendsPage() {
     const [modalLoading, setModalLoading] = useState(false);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/v1/stats')
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+        fetch(`${API_URL}/api/v1/stats`)
             .then(res => res.json())
             .then(setData)
             .catch(console.error)
@@ -45,7 +46,8 @@ export default function TrendsPage() {
             if (category) params.append("category", category);
             if (date) params.append("date", date);
 
-            const res = await fetch(`http://127.0.0.1:8000/api/v1/reports/recent?limit=20&${params.toString()}`);
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+            const res = await fetch(`${API_URL}/api/v1/reports/recent?limit=20&${params.toString()}`);
             const data = await res.json();
             setModalReports(data);
         } catch (e) {
