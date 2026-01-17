@@ -29,3 +29,9 @@ class RiskScore(BaseModel):
     report_count: int
     last_reported_at: Optional[datetime] = None
     reports: List[dict] = []
+    
+    # New V2 Fields
+    confidence_score: int = 100
+    reasons: List[str] = []
+    action_advice: str = "Exercise caution."
+    scan_id: Optional[str] = None

@@ -1,8 +1,15 @@
-from transformers import pipeline
+try:
+    from transformers import pipeline
+except ImportError:
+    pipeline = None
+    print("Warning: transformers module not found. ML features will be disabled.")
+
 import functools
 
 @functools.lru_cache(maxsize=1)
 def get_scam_classifier():
+    if pipeline is None:
+        return None
     try:
         return pipeline("text-classification", model="mshenoda/roberta-spam")
     except Exception as e:
