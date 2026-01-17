@@ -53,3 +53,24 @@ ScamShield calculates a **Risk Score (0-100)** using a multi-layered approach:
 *   **Trends Dashboard**: ✅ Fully Operational. Visual charts for scam activity and categories.
 *   **Traceable Data**: ✅ Fully Operational. Click on charts to see the exact reports behind the data.
 *   **Database**: ✅ Connected & Seeded with test data.
+
+## Sample Data
+
+The application comes with a pre-seeded set of sample data to demonstrate its capabilities. This includes approximately 35-40 entries covering various scam types such as:
+- **UPI Scams**: Fake payment requests, lottery scams.
+- **Phone Scams**: Impersonation, KYC fraud.
+- **URL Scams**: Phishing sites, fake offers.
+- **Message Scams**: Fake job offers, bank alerts.
+
+You can populate the database with this sample data by running the seed script:
+```bash
+python scripts/seed_data.py
+```
+
+## Contributing Data
+
+Users and contributors can add new scam details on a daily basis to help the community. 
+1. **Via the App**: Use the "Report a Scam" feature in the frontend to submit new reports.
+2. **Via API**: POST requests to `/api/v1/reports` with the scam details.
+
+By continuously adding data, we create a more robust database that helps others identify and avoid potential scams.
