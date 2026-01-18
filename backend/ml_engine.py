@@ -4,7 +4,8 @@ import time
 
 # Use Hugging Face Inference API to save RAM on free tier
 # Fallback to SMS Spam model (reliable)
-API_URL = "https://api-inference.huggingface.co/models/mrm8488/bert-tiny-finetuned-sms-spam-detection"
+# Update 2026: Switched to new router.huggingface.co domain due to deprecation
+API_URL = "https://router.huggingface.co/models/mrm8488/bert-tiny-finetuned-sms-spam-detection"
 HF_TOKEN = os.environ.get("HF_API_KEY")
 
 def analyze_text(text: str):
