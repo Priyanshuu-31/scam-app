@@ -57,4 +57,5 @@ async def get_recent_reports(limit: int = 10, category: Optional[str] = None, da
         return res.data
     except Exception as e:
         print(f"Error fetching existing reports: {e}")
-        return []
+        # Return 500 so frontend doesn't wipe data on transient error
+        raise HTTPException(status_code=500, detail="Database connection failed")

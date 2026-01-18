@@ -100,8 +100,23 @@ def calculate_v2_risk_score(reports: List[dict], input_text: str) -> RiskScore:
     community_score_weighted = min(community_score_raw, MAX_SCORE_COMMUNITY) 
     
     # B. Structural Heuristics
+    # 1. Check Primary Type
     heuristic_signals = get_structural_heuristics(normalized_text, primary_type)
     heuristic_score = heuristic_signals["score_impact"]
+    
+    # 2. Check Extracted Entities (Deep Scan)
+    # If the text contains a phone/URL, we specifically check THAT entity too
+    for phone in entities['phones']:
+        h_sig = get_structural_heuristics(phone, EntityType.PHONE)
+        if h_sig["score_impact"] > heuristic_score:
+            heuristic_score = h_sig["score_impact"]
+        heuristic_signals["reasons"].extend(h_sig["reasons"])
+        
+    for url in entities['urls']:
+        h_sig = get_structural_heuristics(url, EntityType.URL)
+        if h_sig["score_impact"] > heuristic_score:
+            heuristic_score = h_sig["score_impact"]
+        heuristic_signals["reasons"].extend(h_sig["reasons"])
     
     # C. Keyword/ML Signal
     keyword_score = 0

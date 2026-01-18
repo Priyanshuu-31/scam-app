@@ -76,8 +76,6 @@ async def get_stats():
         
     except Exception as e:
         print(f"Stats Error: {e}")
-        return {
-            "total_reports": 0,
-            "categories": [],
-            "trend": []
-        }
+    except Exception as e:
+        print(f"Stats Error: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch statistics")
