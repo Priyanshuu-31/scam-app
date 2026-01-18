@@ -19,7 +19,8 @@ CONTEXT_BOOST_SCORE = 30
 
 DANGEROUS_KEYWORDS = [
     "lottery", "winner", "urgent", "expire", "block", "kyc", "bank", 
-    "customs", "seized", "cbi", "police", "refund", "tax", "electricity", "cut"
+    "customs", "seized", "cbi", "police", "refund", "tax", "electricity", "cut",
+    "prize", "claim", "money", "offer", "deal", "congrats", "reward"
 ]
 OTP_KEYWORDS = ["otp", "code", "pin", "password"]
 
@@ -149,6 +150,13 @@ def calculate_v2_risk_score(reports: List[dict], input_text: str) -> RiskScore:
     if entities["urls"] and has_urgency:
         context_boost += CONTEXT_BOOST_SCORE
         context_reasons.append("High Risk: Link + Urgency detected")
+        
+    # Has URL + Financial/Prize keywords?
+    financial_keywords = ["money", "cash", "prize", "reward", "claim", "bank", "pay"]
+    has_financial = any(k in normalized_text.lower() for k in financial_keywords)
+    if (entities["urls"] or "link" in normalized_text.lower()) and has_financial:
+         context_boost += CONTEXT_BOOST_SCORE
+         context_reasons.append("High Risk: Link + Money/Prize claim detected")
         
     # 3. Calculation
     

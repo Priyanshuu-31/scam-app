@@ -46,11 +46,11 @@ def analyze_text(text: str):
                 top_result = max(result[0], key=lambda x: x['score'])
                 
                 # Normalize labels for our app
-                # The model cybersectony/phishing-email-detection-distilbert_v2.1 often returns 'Phishing' and 'Safe'
                 label = top_result['label'].upper()
                 print(f"DEBUG_ML_LABEL: {label}")
                 
-                if label in ["PHISHING", "FRAUD", "SCAM", "MALICIOUS", "LABEL_1"]: 
+                # Broaden the check to capture SPAM, PHISHING, etc.
+                if label in ["PHISHING", "FRAUD", "SCAM", "MALICIOUS", "LABEL_1", "SPAM"]: 
                      top_result['label'] = "SCAM"
                 
                 return top_result
