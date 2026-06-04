@@ -87,12 +87,12 @@ The project is designed for a split deployment architecture:
 
 ## 📊 Features & Status
 
-*   **Scanning Engine**: ✅ Fully Operational. Detects Text, UPI, and URLs.
-*   **Risk Scoring**: ✅ Live. Calculates 0-100 risk based on hybrid signals.
-*   **Live Ticker**: ✅ Live. Real-time feed of scams reported by the community.
-*   **Trends Dashboard**: ✅ Live. Analytics on high-risk categories and activity spikes.
-*   **Traceability**: ✅ Live. Click-through from charts to actual evidence reports.
-*   **Dark Mode**: ✅ Standard. Optimized for high contrast and modern feel.
+*   **Scanning Engine**: Fully Operational. Detects Text, UPI, and URLs.
+*   **Risk Scoring**: Live. Calculates 0-100 risk based on hybrid signals.
+*   **Live Ticker**: Live. Real-time feed of scams reported by the community.
+*   **Trends Dashboard**: Live. Analytics on high-risk categories and activity spikes.
+*   **Traceability**: Live. Click-through from charts to actual evidence reports.
+*   **Dark Mode**: Standard. Optimized for high contrast and modern feel.
 
 ## 🤝 Contributing
 Users are encouraged to add new scam reports daily. This crowdsourced data is the backbone of ScamShield's detection capability.
